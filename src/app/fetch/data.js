@@ -3,6 +3,7 @@
 import Cta from "@/components/cta";
 import Heading from "@/components/heading";
 import axios from "axios";
+import Link from "next/link";
 
 import { useEffect, useState } from "react";
 
@@ -11,7 +12,8 @@ export default function Data() {
 
   useEffect(() => {
     const getData = async () => {
-      const response = await axios.get("http://localhost:3002/movies");
+      // ${params.movieId}
+      const response = await axios.get(`http://localhost:3002/movies/`);
       setData(response.data);
     };
     getData();
@@ -20,12 +22,13 @@ export default function Data() {
   const SHOWING_MOVIES =
     data &&
     data.map((movie) => (
+      <Link href={`/movies/${movie.id}`}>
       <li key={movie.id} className="flex flex-col">
         <img
           className="block h-52 w-60 rounded-xl"
           src={movie.image}
           alt="Placeholder Img"
-        />
+          />
         <div className="w-[10em]">
           <h1 className="font-bold text-lg">{movie.title}</h1>
           <div className="flex items-center">
@@ -36,6 +39,7 @@ export default function Data() {
           </div>
         </div>
       </li>
+          </Link>
     ));
 
   const POPULAR_MOVIES =
