@@ -11,10 +11,11 @@ module.exports = {
         // Dark
         bgDarkMode: "#FFFFFF",
         txtDarkMode: "#000000",
-
+        
         // Light
         bgLightMode: "#000000",
-        txtLightMode: "#FFFFFF"
+        txtLightMode: "#FFFFFF",
+        txtHeadingLightMode: "text-blue-900"
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

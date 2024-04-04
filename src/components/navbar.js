@@ -3,6 +3,8 @@
 import Link from "next/link";
 
 export default function Navbar() {
+
+
   return (
     // Navigation - 3 links
     <nav className="flex justify-between px-10 py-4 w-screen">

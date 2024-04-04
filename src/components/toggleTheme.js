@@ -1,9 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function ToggleTheme({ className }) {
   const [toggle, setToggle] = useState(true);
+
+  const toggling = useEffect(() => {
+    if(toggle) {
+      document.body.classList.add( "dark-mode" )
+    } else {
+      document.body.classList.add( "dark-mode" )
+    }
+  },[toggle])
 
   //   Importer dette til page.js og lave en if statement med: if true then change color!
   const toggleTheme = () => {
