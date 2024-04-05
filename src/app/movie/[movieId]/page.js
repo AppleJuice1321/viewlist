@@ -16,8 +16,12 @@ export default function Page({ params }) {
   }, []);
   console.log(movie)
   return (
-    <>
-      <h1>Details about this movie: {movie.title}</h1>
-    </>
+    <section>
+      <h1>{movie.title}</h1>
+      <span>{movie.rating}</span>
+      <span>{movie.genre[0]}</span>
+      <span>{movie.genre[1]}</span>
+      <span>{movie.genre[2]}</span>
+    </section>
   );
 }
