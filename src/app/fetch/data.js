@@ -9,11 +9,10 @@ import { useEffect, useState } from "react";
 
 export default function Data() {
   const [data, setData] = useState([]);
-
   useEffect(() => {
     const getData = async () => {
       // ${params.movieId}
-      const response = await axios.get(`http://localhost:3002/movies/`);
+      const response = await axios.get("http://localhost:3002/movies/");
       setData(response.data);
     };
     getData();
@@ -22,7 +21,7 @@ export default function Data() {
   const SHOWING_MOVIES =
     data &&
     data.map((movie) => (
-      <Link href={`/movies/${movie.id}`}>
+      <Link href={`/movie/${movie.id}`} key={movie.id}>
       <li key={movie.id} className="flex flex-col">
         <img
           className="block h-52 w-60 rounded-xl"
