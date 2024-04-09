@@ -14,7 +14,7 @@ export default function Navbar() {
       <Link className="text-gray-400" href="/">
         <span className="material-symbols-outlined">book_4</span>
       </Link>
-      <Link className="text-gray-400" href="/">
+      <Link className="text-gray-400" href="favorites">
         <span className="material-symbols-outlined">bookmark</span>
       </Link>
     </nav>
