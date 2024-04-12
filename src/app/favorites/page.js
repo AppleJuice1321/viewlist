@@ -4,21 +4,30 @@ import axios from "axios";
 import { useEffect, useState } from "react"
 
 const API_KEY = "b501bb57edf97c9c373052ade4276d4c";
+const ACCOUNT_ID = "21191127"
+const options = {
+  method: 'POST',
+  headers: {
+    accept: 'application/json',
+    'content-type': 'application/json'
+  },
+  body: JSON.stringify({media_type: 'movie', media_id: 550, favorite: true})
+};
 
 export default function Favorite() {
-    const [requestToken, setRequestToken] = useState([])
+    const [favorite, setFavorite] = useState([])
 
     useEffect(() => {
-        const getData = async () => {
+        const postData = async () => {
           const response = await axios.get(
-            ` https://api.themoviedb.org/3/authentication/token/new?api_key=${API_KEY}`
+            `https://api.themoviedb.org/3/account/${ACCOUNT_ID}/favorite?api_key=${API_KEY}`, options
           );                                                                                                                                                                                                                       
-          setRequestToken(response.requestToken);
+          setFavorite(response.favorite);
+          console.log(response)
         };
-        getData();
+        postData();
       }, []);
 
-      console.log(requestToken)
 
     return (
         <></>

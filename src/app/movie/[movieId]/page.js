@@ -5,6 +5,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Heading from "@/components/heading";
+import Cta from "@/components/cta";
 
 const API_KEY = "b501bb57edf97c9c373052ade4276d4c";
 
@@ -12,6 +13,9 @@ export default function Page({ params }) {
   const [data, setData] = useState([]);
   const [genreData, setGenreData] = useState([]);
   const [video, setVideo] = useState([]);
+  const [cast, setCast] = useState([]);
+
+  const baseYoutubeURL = "https://youtube.com/embed/"
 
   useEffect(() => {
     const getData = async () => {
@@ -21,16 +25,49 @@ export default function Page({ params }) {
       const response2 = await axios.get(
         ` https://api.themoviedb.org/3/movie/${params.movieId}/videos?api_key=${API_KEY}`
       );
+      const response3 = await axios.get(
+        ` https://api.themoviedb.org/3/movie/${params.movieId}/credits?api_key=${API_KEY}`
+      );
       setData(response.data);
       setGenreData(response.data.genres);
-      setVideo(response2.data.results);
+      setVideo(response2.data.results.find(video => video.name.toLowerCase() === "official trailer".toLowerCase()));
+      setCast(response3.data.cast);
     };
     getData();
   }, []);
   // console.log(data);
-  // console.log(video);
+  console.log("https://www.youtube.com/embed/" + video.key + "&controls=0");
+  // console.log(cast);
+  // console.log("https://www.youtube.com/embed/" + video.key + "&controls=0")
 
-  const URL = video.key
+
+  // const TRAILER = async function() {
+  //   const src = "https://www.youtube.com/embed/"
+  //  {<iframe
+  //   className="w-screen h-[15em]"
+  //   src={src + video.key}
+  // ></iframe>}
+  // }
+
+  const CAST =
+    cast &&
+    cast.map((cast_member) => {
+      return (
+        <Link href={`/movie/${cast_member.id}`} key={cast_member.id}>
+          <li key={cast_member.id} className="flex flex-col">
+            <img
+              className="block object-cover object-center h-24 w-24 rounded-lg"
+              src={"https://image.tmdb.org/t/p/original" + cast_member.profile_path}
+              alt="Movie Image"
+            />
+            <div className="w-24">
+              <h1 className="font-bold text-lg">{cast_member.name}</h1>
+            </div>
+          </li>
+        </Link>
+      );
+    });
+
 
   return (
     <div>
@@ -43,12 +80,13 @@ export default function Page({ params }) {
           {/* Dark / Light mode */}
           <ToggleTheme className="absolute end-0 pr-4" />
         </div>
+        {/* video */}
         <iframe
-          className="w-screen"
-          src={"https://www.youtube.com/watch?v=" + URL}
-          frameborder="0"
-          title={video.name}
-        />
+          className="w-screen h-[15em]"
+          src={baseYoutubeURL && baseYoutubeURL + video.key}
+          title="Youtube video player"
+          allowFullScreen
+        ></iframe>
       </header>
 
       <ul className="p-4">
@@ -97,7 +135,17 @@ export default function Page({ params }) {
           <Heading heading="Description" />
           <p>{data.overview}</p>
         </div>
+      <section>
+      <div className="flex justify-between items-center pb-4">
+        <Heading heading="Cast" />
+        <Cta />
+      </div>
+      <ul className="flex overflow-x-scroll no-scrollbar gap-4 overflow-y-hidden font-sans">
+        {CAST}
       </ul>
+      </section>
+      </ul>
+      
     </div>
   );
 }
