@@ -7,8 +7,6 @@ import Link from "next/link";
 import Heading from "@/components/heading";
 import Cta from "@/components/cta";
 
-const API_KEY = "b501bb57edf97c9c373052ade4276d4c";
-
 export default function Page({ params }) {
   const [data, setData] = useState([]);
   const [genreData, setGenreData] = useState([]);
@@ -20,13 +18,13 @@ export default function Page({ params }) {
   useEffect(() => {
     const getData = async () => {
       const response = await axios.get(
-        ` https://api.themoviedb.org/3/movie/${params.movieId}?api_key=${API_KEY}`
+        ` https://api.themoviedb.org/3/movie/${params.movieId}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
       );
       const response2 = await axios.get(
-        ` https://api.themoviedb.org/3/movie/${params.movieId}/videos?api_key=${API_KEY}`
+        ` https://api.themoviedb.org/3/movie/${params.movieId}/videos?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
       );
       const response3 = await axios.get(
-        ` https://api.themoviedb.org/3/movie/${params.movieId}/credits?api_key=${API_KEY}`
+        ` https://api.themoviedb.org/3/movie/${params.movieId}/credits?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
       );
       setData(response.data);
       setGenreData(response.data.genres);

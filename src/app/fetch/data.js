@@ -7,8 +7,6 @@ import Link from "next/link";
 
 import { useEffect, useState } from "react";
 
-const API_KEY = "b501bb57edf97c9c373052ade4276d4c";
-
 // fetch fra data - hovedesiden
 // pre render detalje pagen
 // hent dataene fra cachen under favorite siden
@@ -24,13 +22,13 @@ export default function Data() {
     const getData = async () => {
       const response = await axios.get(
         // &append_to_response=videos,casts
-        `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`
+        `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
       );
       const responseTwo = await axios.get(
-        `https://api.themoviedb.org/3/trending/movie/day?api_key=${API_KEY}`
+        `https://api.themoviedb.org/3/trending/movie/day?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
       );
       const responseThree = await axios.get(
-        `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}`
+        `https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
       );                                                                                                                                                                                                                                                 
       setData(response.data.results);
       setDataTwo(responseTwo.data.results);
