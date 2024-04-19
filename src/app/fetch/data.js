@@ -16,7 +16,7 @@ import { useEffect, useState } from "react";
 export default function Data() {
   const [data, setData] = useState([]);
   const [dataTwo, setDataTwo] = useState([]);
-  const [dataThree, setDataThree] = useState([])
+  const [dataThree, setDataThree] = useState([]);
 
   useEffect(() => {
     const getData = async () => {
@@ -29,10 +29,10 @@ export default function Data() {
       );
       const responseThree = await axios.get(
         `https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
-      );                                                                                                                                                                                                                                                 
+      );
       setData(response.data.results);
       setDataTwo(responseTwo.data.results);
-      setDataThree(responseThree.data.genres)
+      setDataThree(responseThree.data.genres);
     };
     getData();
   }, []);
@@ -61,8 +61,7 @@ export default function Data() {
                 <span>{movie.vote_average.toFixed(1)}/10 IMDb</span>
               </div>
             </div>
-            <div>
-            </div>
+            <div></div>
           </li>
         </Link>
       );
