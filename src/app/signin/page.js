@@ -2,9 +2,11 @@
 import Link from "next/link";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import PrimaryHeader from "@/components/primaryHeader";
+import SecondaryHeader from "@/components/secondaryHeader";
 
 export default function SignIn() {
-  const [token, setToken] = useState([]);
+  const [token, setToken] = useState(null);
 
   async function createToken() {
     const response = await axios.get(
@@ -24,12 +26,16 @@ export default function SignIn() {
   }, []);
 
   return (
-    <>
-      <Link
+    <div>
+      <SecondaryHeader/>
+      <div className="w-screen h-[20em] flex justify-center items-center">
+      <Link className="border-black rounded-lg p-2 bg-blue-900 text-white"
         href={`https://www.themoviedb.org/authenticate/${token}?redirect_to=http://localhost:3000/approved`}
-      >
-        Deez nuts
+        >
+        Log in på TMDB
       </Link>
-    </>
+          </div>
+        <PrimaryHeader/>
+    </div>
   );
 }

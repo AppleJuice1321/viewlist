@@ -14,15 +14,17 @@ export default function ApprovedPage() {
   async function init(request_token) {
     const session_id = await createSessionId(request_token)
     await createSessionCookie(session_id)
+
     const account = await getAccount(session_id)
     await createAccountCookie(account)
+
     router.push("/favorites")
   }
 
-  useEffect(() => {
+  useEffect (function() {
     const request_token = searchParams.get("request_token")
 
-    if (!searchParams.request_token) {
+    if (!request_token) {
       router.push("/signin");
     }
 

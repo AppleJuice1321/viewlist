@@ -1,7 +1,6 @@
-"use server"
 import axios from "axios";
 
-export default async function createSessionId() {
+export default async function createSessionId(request_token) {
   try {
     const response = await axios.post(
       "https://api.themoviedb.org/3/authentication/session/new",
@@ -16,8 +15,8 @@ export default async function createSessionId() {
     );
 
     return response.data.session_id;
-  } catch(error) {
-    console.error(error)
-    return null
+  } catch (error) {
+    console.error(error);
+    return null;
   }
 }
