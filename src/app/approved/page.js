@@ -21,7 +21,7 @@ export default function ApprovedPage() {
     router.push("/favorites")
   }
 
-  useEffect (function() {
+  useEffect(() => {
     const request_token = searchParams.get("request_token")
 
     if (!request_token) {

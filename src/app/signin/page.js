@@ -2,8 +2,6 @@
 import Link from "next/link";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import PrimaryHeader from "@/components/primaryHeader";
-import SecondaryHeader from "@/components/secondaryHeader";
 
 export default function SignIn() {
   const [token, setToken] = useState(null);
@@ -26,16 +24,12 @@ export default function SignIn() {
   }, []);
 
   return (
-    <div>
-      <SecondaryHeader/>
-      <div className="w-screen h-[20em] flex justify-center items-center">
-      <Link className="border-black rounded-lg p-2 bg-blue-900 text-white"
+    <>
+      <Link
         href={`https://www.themoviedb.org/authenticate/${token}?redirect_to=http://localhost:3000/approved`}
-        >
-        Log in på TMDB
+      >
+        Deez nuts
       </Link>
-          </div>
-        <PrimaryHeader/>
-    </div>
+    </>
   );
 }
